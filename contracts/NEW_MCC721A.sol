@@ -12,7 +12,7 @@ import './Utils/OwnerOperator.sol';
 import './Attributes.sol';
 import './Locker/ILocker721.sol';
 
-contract MEW_MCC721A is
+contract NEW_MCC721A is
     Initializable,
     ERC721AUpgradeable,
     ERC721ABurnableUpgradeable,

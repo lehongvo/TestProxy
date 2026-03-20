@@ -8,7 +8,9 @@
     "node": "hardhat node",
     "clean": "hardhat clean",
     "deploy:mcc721a": "hardhat run scripts/deploy/Upgradeable_MCC721A.js --network",
-    "upgrade:mcc721a": "hardhat run scripts/upgrade/Upgradeable_MCC721A.js --network",
+    "upgrade:mcc721a": "hardhat run scripts/upgrade/upgradeProxyMCC721A.js --network",
+    "upgrade:mcc721a:polygon": "hardhat run scripts/upgrade/upgradeProxyMCC721A.js --network polygon",
+    "upgrade:mcc721a:amoy": "hardhat run scripts/upgrade/upgradeProxyMCC721A.js --network amoy",
     "deploy:mcc721a:local": "hardhat run scripts/deploy/Upgradeable_MCC721A.js --network localhost",
     "deploy:mcc721a:amoy": "hardhat run scripts/deploy/Upgradeable_MCC721A.js --network amoy",
     "deploy:mcc721a:polygon": "hardhat run scripts/deploy/Upgradeable_MCC721A.js --network polygon"

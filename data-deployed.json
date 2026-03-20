@@ -32,5 +32,15 @@
             2
         ],
         "deployed_at": "2026-03-20T06:58:02.278Z"
+    },
+    "MCC721A.polygon.upgrade": {
+        "proxy_address": "0x72136C4021551b80b5a68F246fe11dBbe8dCBb29",
+        "old_implement_address": "0x14Bf025686E5Aba95EdAAFaaB1f151fC9857794E",
+        "new_implement_address": "0x14Bf025686E5Aba95EdAAFaaB1f151fC9857794E",
+        "new_contract": "NEW_MCC721A",
+        "deployer": "0xa826774CA92237635421FeBe045CA2f3D1D4dbf0",
+        "updated_name": "MCC721A",
+        "updated_symbol": "MCC721A",
+        "upgraded_at": "2026-03-20T07:36:56.220Z"
     }
 }
