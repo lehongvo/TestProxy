@@ -18,8 +18,12 @@ Cập nhật Token Name, Symbol và thông tin hiển thị trên PolygonScan sa
 
 ## Step 1: Verify Address Ownership
 
-1. Truy cập: https://polygonscan.com/verifiedSignatures
-2. Click **"Sign and Verify"** hoặc truy cập trực tiếp: https://polygonscan.com/verifySignature
+> Link Token Update Form: https://polygonscan.com/tokenupdate
+> Link Verify Ownership: https://polygonscan.com/verifiedSignatures
+
+1. Truy cập: https://polygonscan.com/tokenupdate
+2. Điền contract address: `0x72136C4021551b80b5a68F246fe11dBbe8dCBb29` → Click **Next**
+3. Nếu chưa verify ownership, click link **"tool"** trong thông báo vàng → redirect tới: https://polygonscan.com/verifySignature
 3. Điền form:
 
 | Field | Value |
