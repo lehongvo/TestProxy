@@ -1,0 +1,41 @@
+node_modules
+.env
+
+# Hardhat files
+/cache
+/artifacts
+.hardhat/
+
+# TypeChain files
+/typechain
+/typechain-types
+
+# solidity-coverage files
+/coverage
+/coverage.json
+
+# Hardhat Ignition default folder for deployments against a local node
+ignition/deployments/
+
+# Local env vars
+.env.*
+!.env.example
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build output (if any)
+dist/
+tmp/
+.tmp/
+
+# TypeScript incremental build info
+*.tsbuildinfo
