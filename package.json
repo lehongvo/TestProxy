@@ -11,9 +11,12 @@
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^6.1.2",
+    "@openzeppelin/contracts": "^4.9.6",
+    "@openzeppelin/contracts-upgradeable": "^4.9.6",
     "@openzeppelin/hardhat-upgrades": "^3.9.1",
     "@types/node": "^25.5.0",
     "dotenv": "^17.3.1",
+    "erc721a-upgradeable": "^4.3.0",
     "hardhat": "^2.28.6",
     "hardhat-gas-reporter": "^2.3.0",
     "ts-node": "^10.9.2",

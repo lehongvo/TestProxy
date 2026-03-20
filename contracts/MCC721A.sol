@@ -7,9 +7,9 @@ import 'erc721a-upgradeable/contracts/extensions/ERC721AQueryableUpgradeable.sol
 import '@openzeppelin/contracts/utils/Counters.sol';
 import '@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol';
 
-import '../Utils/OwnerOperator.sol';
+import './Utils/OwnerOperator.sol';
 import './Attributes.sol';
-import '../Locker/ILocker721.sol';
+import './Locker/ILocker721.sol';
 
 contract MCC721A is
     Initializable,
@@ -76,7 +76,7 @@ contract MCC721A is
         address from,
         address to,
         uint256 tokenId
-    ) public payable virtual override(ERC721AUpgradeable) {
+    ) public payable virtual override(ERC721AUpgradeable, IERC721AUpgradeable) {
         require(!addressLocker.isTokenLocked(tokenId), 'TokenId was Locked');
         require(addressLocker.isValidTransfer(_msgSenderERC721A(), to), 'Invalid Transfer');
         super.transferFrom(from, to, tokenId);
