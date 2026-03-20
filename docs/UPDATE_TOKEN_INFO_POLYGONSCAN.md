@@ -1,97 +1,137 @@
-# Update Token Info trên PolygonScan
+# Update Token Info on Block Explorer
 
-## Mục đích
-Cập nhật Token Name, Symbol và thông tin hiển thị trên PolygonScan sau khi upgrade contract.
+## Purpose
+Update Token Name, Symbol and display info on PolygonScan / Etherscan after contract upgrade.
 
 ---
 
-## Thông tin contract
+## Contract Info
+
+### Network 1: Polygon Mainnet
 
 | Key | Value |
 |-----|-------|
-| Proxy Address | `0x72136C4021551b80b5a68F246fe11dBbe8dCBb29` |
-| Implementation | `0x6c6F619a75ceDF1477F0C14375d0d60aDa1E2a57` |
-| Owner | `0xa826774CA92237635421FeBe045CA2f3D1D4dbf0` |
-| Network | Polygon Mainnet |
+| Proxy Address | `0x9972c16Cd174a429958013812295936A9071Dda9` |
+| Implementation | `0x59447abcb418369c6a12e3486e7e50fd06438afb` |
+| Owner | `0x2d56E34350757Fa90352025957e82aa72c30BfC4` |
+| Explorer | https://polygonscan.com |
+| Token Update | https://polygonscan.com/tokenupdate |
+| Verify Ownership | https://polygonscan.com/verifiedSignatures |
+| Proxy Checker | https://polygonscan.com/proxyContractChecker?a=0x9972c16Cd174a429958013812295936A9071Dda9 |
+
+### Network 2: Ethereum Mainnet
+
+| Key | Value |
+|-----|-------|
+| Proxy Address | `0x3b0E6163ac2b7fa936b5fd6f4Bf7D4247157dE61` |
+| Implementation | `0xF92254a358938dc1923768a09D73489ddacC6A8F` |
+| Owner | `0x2d56E34350757Fa90352025957e82aa72c30BfC4` |
+| Explorer | https://etherscan.io |
+| Token Update | https://etherscan.io/tokenupdate |
+| Verify Ownership | https://etherscan.io/verifiedSignatures |
+| Proxy Checker | https://etherscan.io/proxyContractChecker?a=0x3b0E6163ac2b7fa936b5fd6f4Bf7D4247157dE61 |
 
 ---
 
 ## Step 1: Verify Address Ownership
 
-> Link Token Update Form: https://polygonscan.com/tokenupdate
-> Link Verify Ownership: https://polygonscan.com/verifiedSignatures
+> Do this ONCE per network. Same owner `0x2d56E34350757Fa90352025957e82aa72c30BfC4` for both networks.
 
-1. Truy cập: https://polygonscan.com/tokenupdate
-2. Điền contract address: `0x72136C4021551b80b5a68F246fe11dBbe8dCBb29` → Click **Next**
-3. Nếu chưa verify ownership, click link **"tool"** trong thông báo vàng → redirect tới: https://polygonscan.com/verifySignature
-3. Điền form:
+### For Polygon:
+
+1. Go to: https://polygonscan.com/tokenupdate
+2. Enter contract address: `0x9972c16Cd174a429958013812295936A9071Dda9` → Click **Next**
+3. If not yet verified ownership, click **"tool"** link in yellow banner → redirect to: https://polygonscan.com/verifySignature
+4. Fill form:
 
 | Field | Value |
 |-------|-------|
-| Contract Owner/Creator Address | `0xa826774CA92237635421FeBe045CA2f3D1D4dbf0` |
-| Message | Copy nguyên message mà PolygonScan generate cho bạn |
+| Contract Owner/Creator Address | `0x2d56E34350757Fa90352025957e82aa72c30BfC4` |
+| Message | Copy the message that PolygonScan generates |
 
-4. Lấy Signature Hash bằng cách chạy script:
+5. Get Signature Hash via **MetaMask**:
+   - Open MetaMask, make sure you are using wallet `0x2d56E34350757Fa90352025957e82aa72c30BfC4`
+   - Open browser console (F12 → Console)
+   - Paste and run:
 
-```bash
-npx hardhat console --network polygon --no-compile
-```
-
-Trong console chạy:
 ```javascript
-const [deployer] = await ethers.getSigners();
-const message = `PASTE_MESSAGE_TỪ_POLYGONSCAN_VÀO_ĐÂY`;
-const signature = await deployer.signMessage(message);
+const message = `PASTE_MESSAGE_FROM_POLYGONSCAN_HERE`;
+// Example: "[polygonscan.com 20/03/2026 08:41:27] I, hereby verify that I am the owner/creator of the address [0x9972c16Cd174a429958013812295936A9071Dda9]"
+const account = (await ethereum.request({ method: 'eth_requestAccounts' }))[0];
+const signature = await ethereum.request({
+  method: 'personal_sign',
+  params: [message, account]
+});
 console.log("Signature:", signature);
 ```
 
-5. Copy signature (bao gồm `0x` ở đầu) paste vào ô **Signature Hash**
-6. Click **"Verify Ownership"**
+   - MetaMask will popup → Click **Sign**
+   - Copy signature from console
+
+6. Paste signature (including `0x` prefix) into **Signature Hash** field
+7. Click **"Verify Ownership"**
+
+### For Ethereum:
+
+1. Go to: https://etherscan.io/tokenupdate
+2. Enter contract address: `0x3b0E6163ac2b7fa936b5fd6f4Bf7D4247157dE61` → Click **Next**
+3. If not yet verified ownership, click **"tool"** link → redirect to: https://etherscan.io/verifySignature
+4. Same steps as Polygon above (fill form → sign with MetaMask → paste signature)
 
 ---
 
 ## Step 2: Token Update Application Form
 
-1. Truy cập: https://polygonscan.com/tokenupdate
-2. Điền **contract address**: `0x72136C4021551b80b5a68F246fe11dBbe8dCBb29`
-3. Click **Next**
+> Repeat for each network.
 
-### Section 1: Request Type
+### For Polygon:
+
+1. Go to: https://polygonscan.com/tokenupdate
+2. Enter: `0x9972c16Cd174a429958013812295936A9071Dda9` → Click **Next**
+
+### For Ethereum:
+
+1. Go to: https://etherscan.io/tokenupdate
+2. Enter: `0x3b0E6163ac2b7fa936b5fd6f4Bf7D4247157dE61` → Click **Next**
+
+### Fill the form (same for both):
+
+#### Section 1: Request Type
 
 | Field | Value |
 |-------|-------|
-| Choose one | `New/First Time Token Update` |
-| Comment/Message | `Update token name and symbol after contract upgrade` |
+| Choose one | `Existing Token Info Update` |
+| Comment/Message | `Please clear the cached token info and update to the latest token name and symbol from the contract.` |
 
-### Section 2: Basic Information
+#### Section 2: Basic Information
 
 | Field | Value |
 |-------|-------|
-| Token Contract Address | `0x72136C4021551b80b5a68F246fe11dBbe8dCBb29` |
+| Token Contract Address | *(auto-filled)* |
 | Requester Name | `Vincent Vo` |
 | Requester Email Address | `vincentdev924@gmail.com` |
 | Project Name | `MCC` |
 | Official Project Website | `https://github.com/lehongvo/TestProxy` |
 | Official Project Email Address | `vincentdev924@gmail.com` |
-| Link to download a 32x32 svg icon logo | *(link tới file SVG 32x32 - xem Step 2.1 bên dưới)* |
+| Link to download a 32x32 svg icon logo | `https://raw.githubusercontent.com/lehongvo/TestProxy/main/logo.svg` |
 | Project Sector | `NFT` |
-| Project Description | `MCC721A_new is an upgradeable ERC721A NFT collection on Polygon network with attribute management and token locking capabilities.` |
+| Project Description | `MCC is an upgradeable ERC721A NFT collection on Polygon with attribute management and token locking capabilities.` |
 
-### Section 3: Social Profiles (optional - để trống được)
+#### Section 3: Social Profiles (optional - skip)
 
-### Section 4: Price Data (optional - để trống được)
+#### Section 4: Price Data (optional - skip)
 
-### Section 5: Others (optional - để trống được)
+#### Section 5: Others (optional - skip)
 
-4. Click **Submit**
+3. Click **Submit**
 
 ---
 
-## Step 2.1: Tạo SVG Logo (nếu chưa có)
+## Step 2.1: Create SVG Logo (if needed)
 
-PolygonScan yêu cầu link download file SVG 32x32. Cách đơn giản:
+Both PolygonScan and Etherscan require a link to download a 32x32 SVG icon.
 
-1. Tạo file `logo.svg` trong repo:
+1. Create file `logo.svg` in repo:
 
 ```svg
 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
@@ -100,48 +140,64 @@ PolygonScan yêu cầu link download file SVG 32x32. Cách đơn giản:
 </svg>
 ```
 
-2. Commit và push lên GitHub
-3. Lấy raw link: `https://raw.githubusercontent.com/lehongvo/TestProxy/main/logo.svg`
-4. Paste link vào form
+2. Commit and push to GitHub
+3. Get raw link: `https://raw.githubusercontent.com/lehongvo/TestProxy/main/logo.svg`
+4. Paste link into form
 
 ---
 
-## Step 3: Verify Proxy Contract (nếu chưa verify)
+## Step 3: Verify Proxy Contract
 
-1. Truy cập: https://polygonscan.com/proxyContractChecker?a=0x72136C4021551b80b5a68F246fe11dBbe8dCBb29
+> Do this for both networks so the explorer shows "Read as Proxy" / "Write as Proxy" tabs.
+
+### Polygon:
+1. Go to: https://polygonscan.com/proxyContractChecker?a=0x9972c16Cd174a429958013812295936A9071Dda9
 2. Click **"Verify"**
-3. PolygonScan sẽ detect TransparentUpgradeableProxy và link tới implementation
-4. Sau khi verify, trang contract sẽ hiện:
-   - Tab **"Read as Proxy"** / **"Write as Proxy"**
-   - Badge **"Source Code (Proxy)"**
+
+### Ethereum:
+1. Go to: https://etherscan.io/proxyContractChecker?a=0x3b0E6163ac2b7fa936b5fd6f4Bf7D4247157dE61
+2. Click **"Verify"**
+
+After verify:
+- Tab **"Read as Proxy"** / **"Write as Proxy"** will appear
+- Badge **"Source Code (Proxy)"** will show
 
 ---
 
-## Step 4: Kiểm tra kết quả
+## Step 4: Verify Results
 
-1. Truy cập: https://polygonscan.com/token/0x72136C4021551b80b5a68F246fe11dBbe8dCBb29
-2. Kiểm tra TOKEN TRACKER hiển thị `MCC721A_new (MCC721A_new)`
-3. Click tab **"Read as Proxy"** → gọi `name()` và `symbol()` để verify onchain
+### Polygon:
+- Token page: https://polygonscan.com/token/0x9972c16Cd174a429958013812295936A9071Dda9
+- Contract: https://polygonscan.com/address/0x9972c16Cd174a429958013812295936A9071Dda9
+- Implementation: https://polygonscan.com/address/0x59447abcb418369c6a12e3486e7e50fd06438afb#code
 
-> **Lưu ý:** PolygonScan review form thủ công, có thể mất 1-3 ngày làm việc để cập nhật Token Tracker.
+### Ethereum:
+- Token page: https://etherscan.io/token/0x3b0E6163ac2b7fa936b5fd6f4Bf7D4247157dE61
+- Contract: https://etherscan.io/address/0x3b0E6163ac2b7fa936b5fd6f4Bf7D4247157dE61
+- Implementation: https://etherscan.io/address/0xF92254a358938dc1923768a09D73489ddacC6A8F#code
+
+> **Note:** Explorer reviews form manually. It may take 1-3 business days to update Token Tracker display.
 
 ---
 
-## Lệnh hữu ích
+## Useful Commands
 
 ```bash
-# Kiểm tra name/symbol onchain
+# Check name/symbol onchain (Polygon)
 npx hardhat console --network polygon --no-compile
-> const c = await ethers.getContractAt("NEW_MCC721A", "0x72136C4021551b80b5a68F246fe11dBbe8dCBb29")
-> await c.name()    // "MCC721A_new"
-> await c.symbol()  // "MCC721A_new"
+> const c = await ethers.getContractAt("NEW_MCC721A", "0x9972c16Cd174a429958013812295936A9071Dda9")
+> await c.name()
+> await c.symbol()
 
-# Update name/symbol (sửa .env trước)
-npx hardhat run scripts/callUpdateNameAndSymbol.js --network polygon
+# Check name/symbol onchain (Ethereum)
+npx hardhat console --network ethereum --no-compile
+> const c = await ethers.getContractAt("NEW_MCC721A", "0x3b0E6163ac2b7fa936b5fd6f4Bf7D4247157dE61")
+> await c.name()
+> await c.symbol()
 
-# Mint NFT
-npx hardhat run scripts/mintNFT.js --network polygon
+# Verify implementation contract (Polygon)
+npx hardhat verify --network polygon --contract "contracts/NEW_MCC721A.sol:NEW_MCC721A" 0x59447abcb418369c6a12e3486e7e50fd06438afb
 
-# Verify implementation contract
-npx hardhat verify --network polygon --contract "contracts/NEW_MCC721A.sol:NEW_MCC721A" 0x6c6F619a75ceDF1477F0C14375d0d60aDa1E2a57
+# Verify implementation contract (Ethereum)
+npx hardhat verify --network mainnet --contract "contracts/NEW_MCC721A.sol:NEW_MCC721A" 0xF92254a358938dc1923768a09D73489ddacC6A8F
 ```
