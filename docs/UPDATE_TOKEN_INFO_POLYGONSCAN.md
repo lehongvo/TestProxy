@@ -50,13 +50,15 @@ Update Token Name, Symbol and display info on PolygonScan / Etherscan after cont
 | Message | Copy the message that PolygonScan generates |
 
 5. Get Signature Hash via **MetaMask**:
-   - Open MetaMask, make sure you are using wallet `0x2d56E34350757Fa90352025957e82aa72c30BfC4`
-   - Open browser console (F12 → Console)
-   - Paste and run:
+   - Make sure MetaMask is connected with wallet `0x2d56E34350757Fa90352025957e82aa72c30BfC4`
+   - On the PolygonScan Verify Signature page, click **"Sign with MetaMask"** button
+   - MetaMask will popup → Click **Sign**
+   - Signature will auto-fill into the form
+
+6. If there is no "Sign with MetaMask" button, use browser console (F12 → Console):
 
 ```javascript
 const message = `PASTE_MESSAGE_FROM_POLYGONSCAN_HERE`;
-// Example: "[polygonscan.com 20/03/2026 08:41:27] I, hereby verify that I am the owner/creator of the address [0x9972c16Cd174a429958013812295936A9071Dda9]"
 const account = (await ethereum.request({ method: 'eth_requestAccounts' }))[0];
 const signature = await ethereum.request({
   method: 'personal_sign',
@@ -65,10 +67,8 @@ const signature = await ethereum.request({
 console.log("Signature:", signature);
 ```
 
-   - MetaMask will popup → Click **Sign**
-   - Copy signature from console
+   - Copy signature from console → paste into **Signature Hash** field
 
-6. Paste signature (including `0x` prefix) into **Signature Hash** field
 7. Click **"Verify Ownership"**
 
 ### For Ethereum:
@@ -76,7 +76,7 @@ console.log("Signature:", signature);
 1. Go to: https://etherscan.io/tokenupdate
 2. Enter contract address: `0x3b0E6163ac2b7fa936b5fd6f4Bf7D4247157dE61` → Click **Next**
 3. If not yet verified ownership, click **"tool"** link → redirect to: https://etherscan.io/verifySignature
-4. Same steps as Polygon above (fill form → sign with MetaMask → paste signature)
+4. Same steps as Polygon above (connect MetaMask → sign → verify ownership)
 
 ---
 
